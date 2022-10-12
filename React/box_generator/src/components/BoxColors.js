@@ -35,32 +35,23 @@ const BoxColors = (props) => {
     setBox({ ...box, emptyBox: box.array[index] });
   };
 
-  const getBackgroundColor = (index) => {
-    "red";
+  const handleTextInput = (e) => {
+    setBox(e.target.value);
   };
 
-  // const iterateArray = (index) => {};
-
-  // const AddBosx = (e) => {
-  //   e.preventDefault();
-  //   console.log("uyuyyi");
-  // };
+  const handleClick = (e) => {
+    setBox([...box, {}]);
+  };
 
   return (
     <form>
       <div className="button1">
         <label>Color</label>
-        <input
-          type="text"
-          onChange={(e) => setBox((e.target.style.backgroundColor = "red"))}
-        />
-        <button>Add</button>
+        <input type="text" onChange={handleTextInput} />
+        <button onClick={handleClick}>Add</button>
+
         {box.array.map((elements, index) => (
-          <div
-            key={index}
-            style={boxStyling}
-            onClick={getBackgroundColor.index}
-          ></div>
+          <div key={index} style={boxStyling}></div>
         ))}
       </div>
     </form>
