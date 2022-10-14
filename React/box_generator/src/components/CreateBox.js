@@ -1,50 +1,44 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
+import DisplayBox from "./DisplayBox";
+import "./style.css";
 
-// const CreateBox = () => {
-//   const boxStyling = {
-//     display: "flex",
-//     flexFlow: "row wrap",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     // justifyContent: "space - evenly",
-//     // backgroundColor: "red",
-//     height: "25vh",
-//   };
+const CreateBox = (props) => {
+  //Create setter and getter for array index to create the boxes to display on "ADD" clicked
+  const [boxObject, setBoxObject] = useState({});
 
-//   const boxStyling2 = {
-//     width: "20%",
-//     height: "80%",
-//     borderColor: "purple",
-//     borderStyle: "solid",
-//     backgroundColor: "red",
-//   };
+  //Creates setter and getters to take the string of colors from the text box
+  const [arrayList, setArrayList] = useState([]);
 
-//   //Creating this array to be used to deconstructed the array coming from useState
-//   const [box, setBox] = useState({
-//     emptyObject: null,
-//     boxObject: [{ id: 1 }],
-//   });
+  const format = {
+    color: "",
+  };
 
-//   const addBox = (index) => {
-//     setBox({ ...box, emptyObject: box.boxObject[index++] });
-//   };
+  const handleTextInput = (e) => {
+    setBoxObject({ color: e.target.value });
+  };
 
-return (
-//   <div style={boxStyling}>
-//     {/* //This creates a "map" to iterates though the boxObject array */}
-//     // This div is the placeHolder for the boxes that are created
-//     {
-//       (box.boxObject.map = (elements, index) => (
-//         <div
-//           style={boxStyling2}
-//           key={index}
-//           onClick={() => {
-//             addBox(index);
-//           }}
-//         ></div>
-//       ))
-//     }
-//   </div>
-// );
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-// export default CreateBox;
+    setArrayList([...arrayList, boxObject]);
+  };
+
+  return (
+    <div className="main">
+      <form className="form" onSubmit={handleSubmit}>
+        <label>color</label>
+        <input
+          name="color"
+          value={boxObject.color}
+          onChange={handleTextInput}
+          type="text"
+          style={{ backgroundColor: "#eff5f7" }}
+        />
+        <button style={{ backgroundColor: "#2abb9b" }}>ADD</button>
+      </form>
+      <DisplayBox arrayList={arrayList} />
+    </div>
+  );
+};
+
+export default CreateBox;

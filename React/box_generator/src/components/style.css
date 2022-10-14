@@ -1,0 +1,11 @@
+.mainDiv{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.form{
+    text-Align: center;
+    margin-Top: 100px;
+}

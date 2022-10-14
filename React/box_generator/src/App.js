@@ -1,10 +1,11 @@
 import "./App.css";
-import BoxColors from "./components/BoxColors";
+import CreateBox from "./components/CreateBox";
+import DisplayBox from "./components/DisplayBox";
 
 function App(props) {
   return (
     <div className="App">
-      <BoxColors />
+      <CreateBox />
     </div>
   );
 }
