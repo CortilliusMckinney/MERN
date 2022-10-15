@@ -2,7 +2,7 @@ import React from "react";
 
 const DisplayBox = (props) => {
   const { arrayList } = props;
-  
+
   const mainDivStyling = {
     textAlign: "center",
     marginTop: "50px",
@@ -29,5 +29,4 @@ const DisplayBox = (props) => {
     </div>
   );
 };
-
 export default DisplayBox;
