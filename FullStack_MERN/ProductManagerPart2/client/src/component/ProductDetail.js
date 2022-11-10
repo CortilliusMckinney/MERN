@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -25,6 +26,9 @@ const ProductDetail = () => {
       <p>{item.price}</p>
       <p>{item.description}</p>
       {/* <p>{item.description}</p> */}
+      <Link to={`/edit/productDetail/${item._id}`}>
+        <button style={{ marginRight: "50px" }}>edit</button>
+      </Link>
     </div>
   );
 };

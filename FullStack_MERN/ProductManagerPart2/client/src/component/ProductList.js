@@ -1,14 +1,14 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
 
-const ProductList = (props) => {
-  const [list, setList] = useState([]);
+const ProductList = ({ list, setList }) => {
+  const { id } = useParams();
 
   useEffect(() => {
     //Makes a request to the server to grab data
     axios
-      .get("http://localhost:8000/api/getProducts") //Make request
+      .get(`http://localhost:8000/api/getProducts`) //Make request
       .then((res) => {
         console.log(res.data.products);
         setList(res.data.products);
@@ -17,6 +17,22 @@ const ProductList = (props) => {
         console.log(err);
       });
   }, []);
+
+  const handleDelete = (e, element) => {
+    e.preventDefault();
+    console.log("made it");
+
+    axios
+      .delete(`http://localhost:8000/api/deleteProduct/${element._id}`)
+      .then((res) => {
+        console.log("delete front end", res);
+        setList(list.filter((x) => x._id !== element._id));
+        Navigate("/http://localhost:3000");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -30,7 +46,6 @@ const ProductList = (props) => {
           paddingTop: "50px",
           width: "500px",
           display: "inline-flex",
-          // textAlign: "center",
         }}
       >
         <span style={{ marginLeft: "180px" }}>All Products:</span>
@@ -40,6 +55,12 @@ const ProductList = (props) => {
           <Link to={`/productDetail/${element._id}`}>
             <h2>{element.title}</h2>
           </Link>
+          <button
+            onClick={(e) => handleDelete(e, element)}
+            style={{ marginRight: "50px" }}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </div>

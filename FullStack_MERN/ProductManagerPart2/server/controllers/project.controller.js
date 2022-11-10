@@ -27,6 +27,29 @@ module.exports.getOneProduct = (req, res) => {
   Product.findOne({ _id: req.params.id })
     .then((e) => res.json(e))
     .catch((err) => {
-      res.json({ message: "No Products Were Added", error: err });
+      res.json({ message: "No Products Were found", error: err });
+    });
+};
+
+module.exports.DeleteOneProduct = (req, res) => {
+  console.log(req.body); //Debug console.log
+  console.log("new paramsID", req.params.id);
+  Product.deleteOne({ _id: req.params.id })
+    .then((e) => res.json(e))
+    .catch((err) => {
+      res.json({ message: "No Products Were deleted", error: err });
+    });
+};
+
+module.exports.UpdateOneProduct = (req, res) => {
+  console.log(req.body); //Debug console.log
+  console.log("update paramsID", req.params.id);
+  Product.findOneAndUpdate({ _id: req.params.id }, req.body, {
+    new: true,
+    runValidators: true,
+  })
+    .then((e) => res.json(e))
+    .catch((err) => {
+      res.json({ message: "No Products Were Updated", error: err });
     });
 };

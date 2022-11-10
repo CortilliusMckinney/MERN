@@ -7,6 +7,7 @@ const Form = (props) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
+  const [list, setList] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +19,8 @@ const Form = (props) => {
         description,
       })
       .then((res) => {
-        console.log(res);
+        console.log("newEdition", res.data.Product);
+        setList([...list, res.data.Product]);
       })
       .catch((err) => {
         console.log(err);
@@ -51,7 +53,7 @@ const Form = (props) => {
           <button type="submit">Create</button>
         </div>
       </form>
-      <ProductList />
+      <ProductList list={list} setList={setList} />
     </div>
   );
 };
